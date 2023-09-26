@@ -1,0 +1,20 @@
+<!-- AdminLayout.vue -->
+
+<template>
+  <div class="flex flex-col min-h-screen">
+    <header class="p-8 bg-blue-300">
+      <div>
+        <nav>
+          <RouterLink class="mr-2" to="/admin">Manage</RouterLink>
+          <RouterLink to="/admin/contact">Contact</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <div class="flex-grow p-4">
+      <router-view></router-view>
+    </div>
+    <footer class="p-8 bg-gray-500">footer</footer>
+  </div>
+</template>
+
+<script setup></script>

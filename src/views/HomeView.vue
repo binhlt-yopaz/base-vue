@@ -1,10 +1,10 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import store from '../store/index';
 
-const value1 = ref(true);
+const switchs = ref(false);
 
-const status = computed(() => value1.value);
+const status = computed(() => switchs.value);
 
 const tableData = [
   {
@@ -40,17 +40,16 @@ const decrement = () => {
   store.dispatch('countStore/asyncDecrement');
 };
 
-onMounted(async() => {
-  await store.dispatch('countStore/getBlog');
+watch(switchs, (status) => {
+  store.commit('authStore/toggle', { status: status });
 });
-
 </script>
 
 <template>
   <main>
     <h1 class="text-red-500 text-2xl">Home view1</h1>
-    <el-switch v-model="value1" />
-    <p>status : {{ status }}</p>
+    <el-switch v-model="switchs" />
+    <p>status : {{ status ? 'logout' : 'login' }}</p>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column prop="date" label="Date" width="180" />
       <el-table-column prop="name" label="Name" width="180" />

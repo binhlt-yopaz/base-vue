@@ -1,7 +1,5 @@
 // store/index.js
 
-import BlogApi from '@/api/BlogApi';
-
 const state = {
   count: 12,
 };
@@ -24,14 +22,6 @@ const actions = {
       context.commit('decrement');
     }, 500);
   },
-  async getBlog(){
-    try {
-      const response = await BlogApi.getBlog();
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  },
 };
 
 export default {
@@ -40,4 +30,3 @@ export default {
   mutations,
   actions,
 };
-

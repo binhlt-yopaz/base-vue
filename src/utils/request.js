@@ -4,7 +4,7 @@ import { getToken, removeToken } from '@/utils/auth';
 import axios from 'axios';
 // Create axios instance
 const service = axios.create({
-  baseURL: 'http://192.168.1.120:8888',
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000, // Request timeout
 });
 // Request intercepter
@@ -17,7 +17,7 @@ service.interceptors.request.use(
     // Do something with request error
     console.log(error, 111111); // for debug
     Promise.reject(error);
-  }
+  },
 );
 
 // response pre-processing
@@ -30,7 +30,7 @@ service.interceptors.response.use(
 
     return response.data;
   },
-  async(error) => {
+  async (error) => {
     if (error.response.status === 401) {
       await removeToken();
     }
@@ -49,7 +49,7 @@ service.interceptors.response.use(
     console.log(error, 2222222); // for debug
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default service;
