@@ -3,24 +3,12 @@ import Cookies from 'js-cookie';
 
 const tokenKey = 'token';
 
-export async function isLogged() {
+export function isLogged() {
   // console.log('check token');
   if (getToken() === undefined) {
     return false;
   }
   return true;
-  // return await axios.get(process.env.BASE_API + '/users/base-info',
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${getToken()}`,
-  //     },
-  //   }
-  // ).then(() => {
-  //   return true;
-  // }).catch(async() => {
-  //   removeToken();
-  //   return false;
-  // });
 }
 
 export function setToken(token) {

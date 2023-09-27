@@ -3,23 +3,19 @@
     <Form @submit="onSubmit" :validation-schema="schema">
       <div class="flex flex-col mb-2">
         <label for="title">Title</label>
-        <Field name="title" type="text" class="p-2 my-1" />
-        <ErrorMessage name="title" class="text-red-500" />
+        <InputField type="text" name="title" inputClass="p-2 my-1" />
       </div>
       <div class="flex flex-col">
         <label for="slug">Slug</label>
-        <Field name="slug" type="text" class="p-2 my-1" />
-        <ErrorMessage name="slug" class="text-red-500" />
+        <InputField type="text" name="slug" inputClass="p-2 my-1" />
       </div>
       <div class="flex flex-col mb-2">
         <label for="describe">Describe</label>
-        <Field name="describe" type="text" class="p-2 my-1" />
-        <ErrorMessage name="describe" class="text-red-500" />
+        <InputField type="text" name="describe" inputClass="p-2 my-1" />
       </div>
       <div class="flex flex-col">
         <label for="status">Status</label>
-        <Field name="status" type="text" class="p-2 my-1" />
-        <ErrorMessage name="status" class="text-red-500" />
+        <InputField type="text" name="status" inputClass="p-2 my-1" />
       </div>
       <button class="mt-3 px-2 py-1 bg-blue-500 text-white cursor-pointer">Create</button>
     </Form>
@@ -29,7 +25,8 @@
 <script setup>
 import router from '@/router';
 import store from '@/store';
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { Form } from 'vee-validate';
+import InputField from '@/components/InputField/index.vue';
 import * as yup from 'yup';
 const schema = yup.object({
   title: yup.string().required(),

@@ -1,15 +1,11 @@
 import router from '@/router';
-import store from '@/store/index';
-
+import { isLogged } from './utils/auth';
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = store.getters.auth;
-
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!isAuthenticated) {
-      alert('You are not authenticated');
-      next('/');
-    } else {
+    if (isLogged()) {
       next();
+    } else {
+      next('auth/login');
     }
   } else {
     next();

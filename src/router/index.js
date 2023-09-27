@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import UserLayout from '@/layouts/UserLayout.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
+import { isLogged } from '@/utils/auth';
 
 const routes = [
   {
@@ -43,6 +44,27 @@ const routes = [
         path: 'contact',
         name: 'Contact',
         component: () => import('@/views/ContactView.vue'),
+      },
+    ],
+  },
+  {
+    path: '/auth',
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/auth/admin/LoginView.vue'),
+        beforeEnter: (to, from, next) => {
+          if (isLogged()) {
+            next('admin');
+          }
+          next();
+        },
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/auth/admin/RegisterView.vue'),
       },
     ],
   },

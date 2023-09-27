@@ -1,12 +1,21 @@
-const state = {
-  isLogin: false,
-};
-const mutations = {
-  toggle(state, payload) {
-    state.isLogin = payload.status;
+import AuthApi from '@/api/AuthApi';
+import { setToken } from '@/utils/auth';
+
+const state = {};
+const mutations = {};
+const actions = {
+  async login(_, data) {
+    const res = await AuthApi.login(data);
+    if (res.data) {
+      setToken(res.data.access_token);
+    }
+    return res;
+  },
+  async register(_, data) {
+    const res = await AuthApi.register(data);
+    return res;
   },
 };
-const actions = {};
 
 export default {
   namespaced: true,

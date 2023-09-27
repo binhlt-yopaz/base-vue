@@ -96,7 +96,7 @@ const setPage = (value) => {
 };
 
 const editHandle = (id) => {
-  router.push({ name: 'edit', params: { id } });
+  router.push({ name: 'edit', params: { id }});
 };
 
 const deleteHandle = () => {
@@ -111,7 +111,7 @@ watch(
   (page) => {
     store.dispatch('categoryStore/getCategory', { page });
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 const data = computed(() => {

@@ -7,7 +7,7 @@
         <nav>
           <RouterLink class="mr-2" to="/">Home</RouterLink>
           <RouterLink class="mr-2" to="/about">About</RouterLink>
-          <RouterLink to="/admin">Manage</RouterLink>
+          <RouterLink to="/admin">Admin</RouterLink>
         </nav>
       </div>
     </header>

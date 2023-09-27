@@ -1,25 +1,45 @@
 <template>
   <el-card class="w-[480px] m-auto">
-    <Form @submit="onSubmit" :validation-schema="schema" :initial-values="formValues">
+    <Form @submit="onSubmit">
       <div class="flex flex-col mb-2">
         <label for="title">Title</label>
-        <Field name="title" type="text" class="p-2 my-1" />
-        <ErrorMessage name="title" class="text-red-500" />
+        <InputField
+          type="text"
+          name="title"
+          inputClass="p-2 my-1"
+          :errors="errors"
+          :regiter="title"
+        />
       </div>
       <div class="flex flex-col">
         <label for="slug">Slug</label>
-        <Field name="slug" type="text" class="p-2 my-1" />
-        <ErrorMessage name="slug" class="text-red-500" />
+        <InputField
+          type="text"
+          name="slug"
+          inputClass="p-2 my-1"
+          :errors="errors"
+          :regiter="slug"
+        />
       </div>
       <div class="flex flex-col mb-2">
         <label for="describe">Describe</label>
-        <Field name="describe" type="text" class="p-2 my-1" />
-        <ErrorMessage name="describe" class="text-red-500" />
+        <InputField
+          type="text"
+          name="describe"
+          inputClass="p-2 my-1"
+          :errors="errors"
+          :regiter="describe"
+        />
       </div>
       <div class="flex flex-col">
         <label for="status">Status</label>
-        <Field name="status" type="text" class="p-2 my-1" />
-        <ErrorMessage name="status" class="text-red-500" />
+        <InputField
+          type="text"
+          name="status"
+          inputClass="p-2 my-1"
+          :errors="errors"
+          :regiter="status"
+        />
       </div>
       <button class="mt-3 px-2 py-1 bg-blue-500 text-white">Update</button>
     </Form>
@@ -28,11 +48,12 @@
 
 <script setup>
 import CategoryApi from '@/api/CategoryApi';
+import InputField from '@/components/InputField/index.vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import store from '@/store';
-import { Form, Field, ErrorMessage } from 'vee-validate';
-import { onMounted, ref } from 'vue';
+import { Form, useForm } from 'vee-validate';
+import { onMounted } from 'vue';
 import * as yup from 'yup';
 const schema = yup.object({
   title: yup.string().required(),
@@ -41,20 +62,28 @@ const schema = yup.object({
   status: yup.number().required(),
 });
 
-// Initial values
-const formValues = ref({});
+const { errors, defineInputBinds, handleSubmit, setValues } = useForm({
+  validationSchema: schema,
+});
+
 const route = useRoute();
 const id = route.params.id;
-onMounted(async () => {
+
+const title = defineInputBinds('title');
+const slug = defineInputBinds('slug');
+const describe = defineInputBinds('describe');
+const status = defineInputBinds('status');
+
+onMounted(async() => {
   try {
     const response = await CategoryApi.getItem({ id });
-    formValues.value = response.data;
+    setValues(response.data);
   } catch (error) {
     console.log(error);
   }
 });
-async function onSubmit(values) {
+const onSubmit = handleSubmit(async(values) => {
   await store.dispatch('categoryStore/updateCategory', { id, data: values });
   router.push('/admin');
-}
+});
 </script>
