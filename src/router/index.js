@@ -14,6 +14,11 @@ const routes = [
         component: () => import('@/views/HomeView.vue'),
       },
       {
+        path: ':carName/:id(\\d+)',
+        name: 'Details',
+        component: () => import('@/views/DetailCarView.vue'),
+      },
+      {
         path: 'about',
         name: 'About',
         component: () => import('@/views/AboutView.vue'),
@@ -36,14 +41,29 @@ const routes = [
         component: () => import('@/views/CreateView.vue'),
       },
       {
-        path: 'edit/:id',
+        path: 'edit/:id(\\d+)',
         name: 'edit',
         component: () => import('@/views/EditView.vue'),
       },
       {
-        path: 'contact',
-        name: 'Contact',
-        component: () => import('@/views/ContactView.vue'),
+        path: 'cars',
+        children: [
+          {
+            path: '',
+            name: 'car',
+            component: () => import('@/views/MangerCarView.vue'),
+          },
+          {
+            path: 'create',
+            name: 'createCar',
+            component: () => import('@/views/CreateCarView.vue'),
+          },
+          {
+            path: 'edit/:id(\\d+)',
+            name: 'editCar',
+            component: () => import('@/views/EditCarView.vue'),
+          },
+        ],
       },
     ],
   },

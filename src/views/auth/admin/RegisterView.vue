@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen py-[200px]">
     <el-card class="w-[480px] m-auto">
       <Form @submit="onSubmit">
         <div class="flex flex-col mb-2">
@@ -32,7 +32,11 @@
             :regiter="confirm_password"
           />
         </div>
-        <button class="mt-3 px-2 py-1 bg-blue-500 text-white transition-transform duration-300 ease-in-out">Register</button>
+        <button
+          class="mt-3 px-2 py-1 bg-blue-500 text-white transition-transform duration-300 ease-in-out"
+        >
+          Register
+        </button>
       </Form>
     </el-card>
   </div>
@@ -47,7 +51,8 @@ import * as yup from 'yup';
 const schema = yup.object({
   email: yup.string().required('email required').email('Email invalid'),
   password: yup.string().required('Password required'),
-  confirm_password: yup.string()
+  confirm_password: yup
+    .string()
     .required()
     .oneOf([yup.ref('password')], 'Passwords do not match'),
 });
@@ -60,7 +65,7 @@ const email = defineInputBinds('email');
 const password = defineInputBinds('password');
 const confirm_password = defineInputBinds('confirm_password');
 
-const onSubmit = handleSubmit(async(values) => {
+const onSubmit = handleSubmit(async (values) => {
   const res = await store.dispatch('authStore/register', values);
   if (res.status === 'success') {
     router.push('/auth/login');

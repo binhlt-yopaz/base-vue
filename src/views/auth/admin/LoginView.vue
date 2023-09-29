@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen py-[200px]">
     <el-card class="w-[480px] m-auto">
       <Form @submit="onSubmit">
         <div class="flex flex-col mb-2">
@@ -22,8 +22,11 @@
             :regiter="password"
           />
         </div>
-        <button class="mt-3 px-2 py-1 bg-blue-500 text-white">Login</button>
+        <button class="mt-3 px-2 py-1 bg-blue-500 text-white mb-2">Login</button>
       </Form>
+      <RouterLink to="/auth/register" class="text-red-500 underline"
+        >Do not have an account ? Sign up</RouterLink
+      >
     </el-card>
   </div>
 </template>
@@ -46,7 +49,7 @@ const { errors, defineInputBinds, handleSubmit } = useForm({
 const email = defineInputBinds('email');
 const password = defineInputBinds('password');
 
-const onSubmit = handleSubmit(async(values) => {
+const onSubmit = handleSubmit(async (values) => {
   const res = await store.dispatch('authStore/login', values);
   if (res.status === 'success') {
     router.push('/admin');

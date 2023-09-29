@@ -2,8 +2,8 @@
   <main>
     <div class="flex justify-between items-center my-4">
       <h1 class="text-red">Manage</h1>
-      <el-button type="info" @click="() => router.push({ name: 'create' })"
-        >Create category</el-button
+      <el-button type="info" @click="() => router.push({ name: 'createCar' })"
+        >Create car</el-button
       >
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -13,38 +13,38 @@
         >
           <tr>
             <th scope="col" class="px-6 py-3">ID</th>
-            <th scope="col" class="px-6 py-3">Title</th>
-            <th scope="col" class="px-6 py-3">Slug</th>
-            <th scope="col" class="px-6 py-3">describe</th>
-            <th scope="col" class="px-6 py-3">status</th>
+            <th scope="col" class="px-6 py-3">Name</th>
+            <th scope="col" class="px-6 py-3">Image</th>
+            <th scope="col" class="px-6 py-3">Option</th>
+            <th scope="col" class="px-6 py-3">Description</th>
             <th scope="col" class="px-6 py-3">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="item in data"
-            :key="item.id"
+            v-for="car in data"
+            :key="car.id"
             class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
           >
             <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {{ item.id }}
+              {{ car.id }}
             </th>
             <td class="px-6 py-4">
-              {{ item.title }}
+              {{ car.name }}
             </td>
             <td class="px-6 py-4">
-              {{ item.slug }}
+              <img :src="car.image" class="w-[80px] object-cover h-[80px]" />
             </td>
             <td class="px-6 py-4">
-              {{ item.describe }}
+              {{ car.state === 1 ? 'Full options' : 'Standard' }}
             </td>
             <td class="px-6 py-4">
-              {{ item.status }}
+              {{ car.description }}
             </td>
             <td class="px-6 py-4">
               <el-icon
                 :size="20"
-                @click="editHandle(item.id)"
+                @click="editHandle(car.id)"
                 color="#409EFC"
                 class="cursor-pointer mr-1"
               >
@@ -54,7 +54,7 @@
                 :size="20"
                 color="#F56C6C"
                 class="cursor-pointer"
-                @click="() => setId(item.id)"
+                @click="() => setId(car.id)"
               >
                 <Delete />
               </el-icon>
@@ -64,7 +64,7 @@
       </table>
     </div>
     <div class="mt-5">
-      <Pagination :total="105" @current-change="setPage" />
+      <Pagination :total="13" @current-change="setPage" />
     </div>
     <el-dialog v-model="centerDialogVisible" title="Warning" width="30%" center>
       <span> It should be noted that the content will not be aligned in center by default </span>
@@ -87,7 +87,7 @@ const page = ref(1);
 const centerDialogVisible = ref(false);
 // func
 const setId = (id) => {
-  store.commit('categoryStore/setId', id);
+  store.commit('carStore/setId', id);
   centerDialogVisible.value = true;
 };
 
@@ -96,26 +96,26 @@ const setPage = (value) => {
 };
 
 const editHandle = (id) => {
-  router.push({ name: 'edit', params: { id } });
+  router.push({ name: 'editCar', params: { id } });
 };
 
 const deleteHandle = () => {
-  const id = store.state.categoryStore.id;
-  store.dispatch('categoryStore/deleteCategory', { id });
+  const id = store.state.carStore.id;
+  store.dispatch('carStore/deleteCar', { id });
   centerDialogVisible.value = false;
-  store.dispatch('categoryStore/getCategory', { page: page.value });
+  store.dispatch('carStore/getCars', { page: page.value });
 };
 
 watch(
   page,
   (page) => {
-    store.dispatch('categoryStore/getCategory', { page });
+    store.dispatch('carStore/getCars', { page });
   },
   { immediate: true },
 );
 
 const data = computed(() => {
-  return store.getters.category;
+  return store.getters.car;
 });
 </script>
 

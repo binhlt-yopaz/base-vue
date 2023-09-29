@@ -1,19 +1,31 @@
 <script setup>
 import { toRefs } from 'vue';
-import { Field } from 'vee-validate';
 
 const props = defineProps({
   label: String,
   name: String,
+  register: Object,
+  state: Number,
   value: {
     type: String,
   },
 });
 
-const { name, value, label } = toRefs(props);
+const { name, value, label, state } = toRefs(props);
+console.log('value', props.state);
 </script>
 
-<template>{{ label }} <Field :name="name" type="radio" :value="value" class="mx-2" /></template>
+<template>
+  {{ label }}
+  <input
+    :checked="value === state ? 'true' : 'false'"
+    v-bind="register"
+    :name="name"
+    type="radio"
+    :value="value"
+    class="mx-2"
+  />
+</template>
 
 <style scoped>
 button {

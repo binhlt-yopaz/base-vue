@@ -1,3 +1,4 @@
+import router from '@/router';
 import Cookies from 'js-cookie';
 // import axios from 'axios';
 
@@ -21,4 +22,9 @@ export function removeToken() {
 
 export function getToken() {
   return Cookies.get(tokenKey);
+}
+
+export function logout() {
+  removeToken();
+  router.push('auth/login');
 }
