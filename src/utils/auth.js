@@ -1,26 +1,15 @@
+import router from '@/router';
 import Cookies from 'js-cookie';
 // import axios from 'axios';
 
 const tokenKey = 'token';
 
-export async function isLogged() {
+export function isLogged() {
   // console.log('check token');
   if (getToken() === undefined) {
     return false;
   }
   return true;
-  // return await axios.get(process.env.BASE_API + '/users/base-info',
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${getToken()}`,
-  //     },
-  //   }
-  // ).then(() => {
-  //   return true;
-  // }).catch(async() => {
-  //   removeToken();
-  //   return false;
-  // });
 }
 
 export function setToken(token) {
@@ -33,4 +22,9 @@ export function removeToken() {
 
 export function getToken() {
   return Cookies.get(tokenKey);
+}
+
+export function logout() {
+  removeToken();
+  router.push('auth/login');
 }

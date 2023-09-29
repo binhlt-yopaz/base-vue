@@ -16,6 +16,7 @@
       </Field>
       <ErrorMessage :name="name" />
     </div>
+
     <button>Submit</button>
   </Form>
 </template>
@@ -24,8 +25,8 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 defineProps({
   schema: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const onSubmit = (value) => {

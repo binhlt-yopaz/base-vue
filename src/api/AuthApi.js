@@ -1,6 +1,6 @@
 import BaseApi from './BaseApi';
 
-const baseUrl = 'auth';
+const baseUrl = 'api/v1';
 
 class AuthApi extends BaseApi {
   login(data) {
@@ -8,14 +8,10 @@ class AuthApi extends BaseApi {
       return error.response;
     });
   }
-  forgotPassword(data) {
-    return this.axios.post(this.baseUrl + '/forgot-password', data);
-  }
-  renewPassword(data) {
-    return this.axios.post(this.baseUrl + '/renew-password', data);
-  }
-  verifyExpired(data) {
-    return this.axios.post(this.baseUrl + '/verify-expired', data);
+  register(data) {
+    return this.axios.post(this.baseUrl + '/register', data).catch((error) => {
+      return error.response;
+    });
   }
 }
 

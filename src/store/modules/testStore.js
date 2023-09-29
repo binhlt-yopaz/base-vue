@@ -1,12 +1,8 @@
 const state = {
   count: 4,
 };
-const mutations = {
-
-};
-const actions = {
-
-};
+const mutations = {};
+const actions = {};
 
 export default {
   namespaced: true,
@@ -14,4 +10,3 @@ export default {
   mutations,
   actions,
 };
-

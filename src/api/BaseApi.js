@@ -2,7 +2,7 @@ import request from '@/utils/request';
 
 export default class BaseApi {
   constructor(baseUrl) {
-    this.baseUrl = 'http://192.168.1.120:8888' + '/' + baseUrl;
+    this.baseUrl = import.meta.env.VITE_APP_BASE_API + '/' + baseUrl;
     this.axios = request;
   }
 

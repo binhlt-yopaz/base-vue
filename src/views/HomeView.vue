@@ -1,67 +1,50 @@
-<script setup>
-import { computed, onMounted, ref } from 'vue';
-import store from '../store/index';
-
-const value1 = ref(true);
-
-const status = computed(() => value1.value);
-
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-];
-
-const value = computed(() => store.getters.count);
-const test = computed(() => store.getters.test);
-
-const increment = () => {
-  store.dispatch('countStore/asyncIncrement');
-};
-
-const decrement = () => {
-  store.dispatch('countStore/asyncDecrement');
-};
-
-onMounted(async() => {
-  await store.dispatch('countStore/getBlog');
-});
-
-</script>
-
 <template>
   <main>
-    <h1 class="text-red-500 text-2xl">Home view1</h1>
-    <el-switch v-model="value1" />
-    <p>status : {{ status }}</p>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table>
-    <p>count:{{ value }}</p>
-    <p>test:{{ test }}</p>
-
-    <div class="flex">
-      <button @click="increment">Increment</button>
-      <button @click="decrement">Decrement</button>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 px-32 lg:px-60">
+      <el-card :body-style="{ padding: '0px' }" v-for="(car, index) in data" :key="index">
+        <img :src="car.image" class="w-full object-cover h-[250px]" />
+        <div style="padding: 14px">
+          <h2 class="mb-2">{{ car.name }}</h2>
+          <h4 class="mb-2">option:{{ car.state === 1 ? 'Full options' : 'Standard' }}</h4>
+          <p class="mb-2">{{ car.description }}</p>
+          <time class="time">{{ formatDate(car.created_at) }}</time>
+        </div>
+        <div class="w-full flex justify-center p-2">
+          <el-button
+            type="primary"
+            @click="
+              () => router.push({ name: 'Details', params: { carName: car.name, id: car.id } })
+            "
+            >Detail</el-button
+          >
+        </div>
+      </el-card>
+    </div>
+    <div class="mt-5 px-60">
+      <Pagination :total="11" @current-change="setPage" />
     </div>
   </main>
 </template>
+<script setup>
+import store from '@/store';
+import { formatDate } from '@/utils/date';
+import { computed, ref, watch } from 'vue';
+import Pagination from '@/components/Pagination/index.vue';
+import router from '@/router';
+
+const page = ref(1);
+
+const setPage = (value) => {
+  page.value = value;
+};
+watch(
+  page,
+  (page) => {
+    store.dispatch('carStore/getCars', { page });
+  },
+  { immediate: true },
+);
+const data = computed(() => {
+  return store.getters.car;
+});
+</script>
