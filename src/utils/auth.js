@@ -26,5 +26,5 @@ export function getToken() {
 
 export function logout() {
   removeToken();
-  router.push('auth/login');
+  router.push('/auth/login');
 }

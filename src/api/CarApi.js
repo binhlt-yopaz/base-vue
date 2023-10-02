@@ -3,8 +3,9 @@ import BaseApi from './BaseApi';
 const baseUrl = 'api/v1';
 
 class CarApi extends BaseApi {
-  getCar({ page }) {
-    return this.axios.get(this.baseUrl + `/cars?page=${page}`).catch((error) => {
+  getCar({ params }) {
+    const searchParams = new URLSearchParams(params);
+    return this.axios.get(this.baseUrl + `/cars?${searchParams.toString()}`).catch((error) => {
       throw new Error(error);
     });
   }

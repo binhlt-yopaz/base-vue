@@ -49,7 +49,7 @@ const { errors, defineInputBinds, handleSubmit } = useForm({
 const email = defineInputBinds('email');
 const password = defineInputBinds('password');
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async(values) => {
   const res = await store.dispatch('authStore/login', values);
   if (res.status === 'success') {
     router.push('/admin');

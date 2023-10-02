@@ -42,7 +42,7 @@ watch(
   (page) => {
     store.dispatch('carStore/getCars', { page });
   },
-  { immediate: true },
+  { immediate: true }
 );
 const data = computed(() => {
   return store.getters.car;
