@@ -69,7 +69,7 @@ const slug = defineInputBinds('slug');
 const describe = defineInputBinds('describe');
 const status = defineInputBinds('status');
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async(values) => {
   await store.dispatch('categoryStore/createCategory', { data: values });
   router.push('/admin');
 });

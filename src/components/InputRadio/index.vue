@@ -5,26 +5,17 @@ const props = defineProps({
   label: String,
   name: String,
   register: Object,
-  state: Number,
   value: {
     type: String,
   },
 });
 
-const { name, value, label, state } = toRefs(props);
-console.log('value', props.state);
+const { name, value, label } = toRefs(props);
 </script>
 
 <template>
   {{ label }}
-  <input
-    :checked="value === state ? 'true' : 'false'"
-    v-bind="register"
-    :name="name"
-    type="radio"
-    :value="value"
-    class="mx-2"
-  />
+  <input v-bind="register" :name="name" type="radio" :value="value" class="mx-2" />
 </template>
 
 <style scoped>

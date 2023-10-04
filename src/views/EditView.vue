@@ -74,7 +74,7 @@ const slug = defineInputBinds('slug');
 const describe = defineInputBinds('describe');
 const status = defineInputBinds('status');
 
-onMounted(async () => {
+onMounted(async() => {
   try {
     const response = await CategoryApi.getItem({ id });
     setValues(response.data);
@@ -82,7 +82,7 @@ onMounted(async () => {
     console.log(error);
   }
 });
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async(values) => {
   await store.dispatch('categoryStore/updateCategory', { id, data: values });
   router.push('/admin');
 });

@@ -31,7 +31,7 @@ const props = defineProps({
 const isPassword = props.type === 'password';
 const passwordVisible = ref(false);
 const inputType = computed(() =>
-  isPassword ? (passwordVisible.value ? 'text' : 'password') : props.type,
+  isPassword ? (passwordVisible.value ? 'text' : 'password') : props.type
 );
 
 function togglePasswordVisibility() {
