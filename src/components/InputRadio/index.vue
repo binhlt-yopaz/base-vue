@@ -1,27 +1,29 @@
-<script setup>
-import { toRefs } from 'vue';
-
-const props = defineProps({
-  label: String,
-  name: String,
-  register: Object,
-  value: {
-    type: String,
-  },
-});
-
-const { name, value, label } = toRefs(props);
-</script>
-
 <template>
-  {{ label }}
-  <input v-bind="register" :name="name" type="radio" :value="value" class="mx-2" />
+  <div>
+    <div style="display: flex">
+      <div v-for="option in options" :key="option.value" class="flex">
+        <input
+          type="radio"
+          :value="option.value"
+          :name="name"
+          v-model="radioValue"
+          @change="handleChange"
+        />
+        <label class="ml-1 mr-9 text-base">{{ option.key }}</label>
+      </div>
+    </div>
+    <div class="error-feedback">{{ errors[name] }}</div>
+  </div>
 </template>
 
-<style scoped>
-button {
-  background: none;
-  border: none;
-  font-size: 22px;
-}
-</style>
+<script setup>
+import { ref } from 'vue';
+const props = defineProps({
+  name: String,
+  options: Array,
+  value: String,
+  handleChange: Function,
+  errors: Object,
+});
+const radioValue = ref(props.value);
+</script>

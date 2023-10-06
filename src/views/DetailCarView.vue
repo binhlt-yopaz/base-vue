@@ -25,7 +25,7 @@ const car = ref({});
 const route = useRoute();
 const id = route.params.id;
 
-onMounted(async() => {
+onMounted(async () => {
   try {
     const res = await CarApi.getCarItem({ id });
     car.value = res.data;

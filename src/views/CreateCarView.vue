@@ -110,7 +110,7 @@ const handleImageChange = (event) => {
     imagePreviewUrl.value = '';
   }
 };
-const onSubmit = handleSubmit(async(values, { resetForm }) => {
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
   if (!file.value) {
     setErrors({ image: 'file is required' });
     return;

@@ -146,7 +146,7 @@ const setPage = (value) => {
 };
 const total = computed(() => store.state.carStore.total);
 const editHandle = (id) => {
-  router.push({ name: 'editCar', params: { id }});
+  router.push({ name: 'editCar', params: { id } });
 };
 const reloadPage = () => {
   queryName.value = '';
@@ -167,7 +167,7 @@ const deleteHandle = () => {
 
 watch(
   [queryName, queryState, queryPage],
-  async([name, state, page]) => {
+  async ([name, state, page]) => {
     // store.dispatch('carStore/getCars', { page });
     const filterParams = { name, state, page };
     for (const key in filterParams) {
@@ -179,15 +179,15 @@ watch(
     await store.dispatch('carStore/getCars', { params: filterParams });
     loading.value = false;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const data = computed(() => {
   return store.getters.car;
 });
 
-const onSubmit = handleSubmit(async(values, { resetForm }) => {
-  router.push({ name: 'car', query: { ...values, page: 1 }});
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+  router.push({ name: 'car', query: { ...values, page: 1 } });
   queryState.value = values.state;
   queryName.value = values.name;
 });

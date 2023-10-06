@@ -36,9 +36,9 @@ const routes = [
         component: () => import('@/views/ManageView.vue'),
       },
       {
-        path: 'create',
-        name: 'create',
-        component: () => import('@/views/CreateView.vue'),
+        path: 'model',
+        name: 'CarModel',
+        component: () => import('@/views/admin/CarModel/CarModelList.vue'),
       },
       {
         path: 'edit/:id(\\d+)',

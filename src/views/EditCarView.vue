@@ -128,7 +128,7 @@ const handleImageChange = (event) => {
 
 const route = useRoute();
 const id = route.params.id;
-onMounted(async() => {
+onMounted(async () => {
   try {
     const response = await CarApi.getCarItem({ id });
     setValues(response.data);
@@ -137,7 +137,7 @@ onMounted(async() => {
     console.log(error);
   }
 });
-const onSubmit = handleSubmit(async(values, { resetForm }) => {
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
   if (!file.value) {
     setErrors({ image: 'file is required' });
     return;

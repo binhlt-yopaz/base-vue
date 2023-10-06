@@ -65,7 +65,7 @@ const email = defineInputBinds('email');
 const password = defineInputBinds('password');
 const confirm_password = defineInputBinds('confirm_password');
 
-const onSubmit = handleSubmit(async(values) => {
+const onSubmit = handleSubmit(async (values) => {
   const res = await store.dispatch('authStore/register', values);
   if (res.status === 'success') {
     router.push('/auth/login');
