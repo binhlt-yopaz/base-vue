@@ -9,7 +9,7 @@
             style="border-right: 1px solid #707070"
           >
             メーカー検索<br />
-            データ件数　30件
+            データ件数30件
           </div>
           <div class="mr-2 px-[22px]" style="border-right: 1px dashed #707070">
             <p class="mb-1 text-[15px]">メーカー名</p>
@@ -60,6 +60,7 @@
     <div>
       <div class="w-full mb-2 flex justify-end">
         <button
+          @click="router.push({ name: 'createModel' })"
           class="px-[17px] py-[9px] border-2 border-[#E0E0E0] rounded outline-none flex items-center cursor-pointer"
         >
           <el-icon class="mr-[18px]"><Plus /></el-icon>
@@ -73,6 +74,7 @@
             <p class="text-center text-[15px] font-normal mb-3">レクサス</p>
           </div>
           <button
+            @click="() => router.push({ name: 'carManager' })"
             class="py-2 w-full bg-[#AF1A1A] text-center border-none cursor-pointer text-white"
           >
             車種マスタ管理
@@ -195,7 +197,7 @@
         </div>
       </div>
       <div class="w-full flex justify-center mt-8">
-        <Pagination :total="50" @current-change="setPage" />
+        <Pagination :total="1000" />
       </div>
     </div>
   </div>
@@ -206,8 +208,10 @@ import InputField from '@/components/InputField/index.vue';
 import InputRadio from '@/components/InputRadio/index.vue';
 import Pagination from '@/components/Pagination/index.vue';
 import { useForm, useField } from 'vee-validate';
+import router from '@/router';
 
-const inputStyle = 'py-[6px] px-[11px] text-[15px] font-normal rounded outline-none w-[193px]';
+const inputStyle =
+  'py-[6px] px-[11px] text-[15px] font-normal rounded outline-none border w-[193px]';
 const { errors, handleSubmit } = useForm();
 const { value: name, handleChange: nameChange, handleBlur: nameBlur } = useField('name');
 const { value: car_type, handleChange: carTypeChange } = useField('import_car_type');

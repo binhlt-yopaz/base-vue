@@ -1,16 +1,14 @@
 <template>
-  <div>
     <input
       style="border-bottom: 1px solid #707070"
       :class="className"
-      :name="value"
+      :name="name"
       :type="type"
       :value="value"
       :placeholder="placeholder"
       @input="handleChange"
       @blur="handleBlur"
     />
-  </div>
 </template>
 
 <script setup>

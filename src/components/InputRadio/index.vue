@@ -6,13 +6,14 @@
           type="radio"
           :value="option.value"
           :name="name"
+          class="w-4 cursor-pointer"
           v-model="radioValue"
           @change="handleChange"
         />
-        <label class="ml-1 mr-9 text-base">{{ option.key }}</label>
+        <label class="ml-2 mr-9 text-base">{{ option.key }}</label>
       </div>
     </div>
-    <div class="error-feedback">{{ errors[name] }}</div>
+    <div class="mt-1 text-red-500">{{ errors[name] }}</div>
   </div>
 </template>
 

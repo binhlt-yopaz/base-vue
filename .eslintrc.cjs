@@ -126,7 +126,6 @@ module.exports = {
       'before': false,
       'after': true,
     }],
-    'space-before-function-paren': [2, 'never'],
     'space-in-parens': [2, 'never'],
     'space-infix-ops': 2,
     'space-unary-ops': [2, {
